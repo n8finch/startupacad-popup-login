@@ -21,7 +21,7 @@ function n8f_pop_add_these_plugin_styles_and_scripts() {
 
 	wp_enqueue_style( 'n8f-pop-login-css', plugin_dir_url( __FILE__ ) . 'css/n8f-pop-login.css' );
 
-	wp_enqueue_script( 'n8f-pop-login-js', plugin_dir_url( __FILE__ ) . 'js/n8f-pop-login.js', array( 'jquery', 'jquery-ui-dialog' ), false, false );
+	wp_enqueue_script( 'n8f-pop-login-js', plugin_dir_url( __FILE__ ) . 'js/n8f-pop-login.js', array( 'jquery', 'jquery-ui-dialog', 'jquery-ui-tabs' ), false, false );
 
 }
 
