@@ -10,6 +10,7 @@
             modal: true,
             height: 450,
             width: 400,
+            closeOnEscape: false,
         });
 
 
