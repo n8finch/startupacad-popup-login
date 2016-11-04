@@ -1,0 +1,12 @@
+.ui-widget-overlay {
+  background: #000 url(images/ui-bg_flat_0_aaaaaa_40x100.png) 50% 50% repeat-x;
+  opacity: .3;
+}
+
+div#n8f-popup-login-message div.ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix.ui-draggable-handle {
+  display: none !important;
+}
+
+button.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-icon-only.ui-dialog-titlebar-close {
+	display: none !important;
+}
