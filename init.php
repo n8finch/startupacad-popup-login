@@ -11,7 +11,6 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: n8f-popup-login
 */
 
-namespace n8fPopupLogin;
 
 require_once plugin_dir_path( __FILE__ ) . 'inc/main.php';
 
@@ -23,7 +22,14 @@ function n8f_pop_add_these_plugin_styles_and_scripts() {
 
 	wp_enqueue_script( 'n8f-pop-login-js', plugin_dir_url( __FILE__ ) . 'js/n8f-pop-login.js', array( 'jquery', 'jquery-ui-dialog', 'jquery-ui-tabs' ), false, false );
 
+	wp_localize_script( 'n8f-pop-login-js', 'ajax_login_object', array(
+        'ajaxurl' => admin_url( 'admin-ajax.php' ),
+        'redirecturl' => home_url(),
+        'loadingmessage' => __('Sending user info, please wait...')
+    ));
+
+    // Enable the user with no privileges to run ajax_login() in AJAX
+    add_action( 'wp_ajax_nopriv_ajaxlogin', 'ajax_login' );
+
 }
-
-
 

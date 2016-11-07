@@ -10,3 +10,23 @@ div#n8f-popup-login-message div.ui-dialog-titlebar.ui-widget-header.ui-corner-al
 button.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-icon-only.ui-dialog-titlebar-close {
 	display: none !important;
 }
+
+
+
+
+
+/*form#login{
+    display: none;
+    background-color: #FFFFFF;
+    position: fixed;
+    top: 200px;
+    padding: 40px 25px 25px 25px;
+    width: 350px;
+    z-index: 999;
+    left: 50%;
+    margin-left: -200px;
+}
+
+form#login p.status{
+    display: none;
+}*/
