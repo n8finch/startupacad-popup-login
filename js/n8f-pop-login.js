@@ -17,13 +17,40 @@
 
     });
 
+    $(document).ready(function() {
+        console.log('n8f-pop- load');
+
+        // $('#popup-email').on('focus', function() {
+        //     console.log('focus');
+        // });
+
+        $("#popup-submit").on('click', function(event) {
+            event.preventDefault();
+            var regEmail = $('#popup-email').val();
+            console.log('Value: ' + regEmail);
+
+            var $apiURL, $inputParams;
+
+            $apiURL = 'http://startupacademy.staging.wpengine.com/wp-content/plugins/membermouse/api/request.php?q=/createMember';
+
+            $inputParams = "apikey=jpuqzijsv9&apisecret=jqsdfh90gg&";
+            $inputParams += "email="+ regEmail + "&";
+            $inputParams += "membership_level_id=3&";
+
+            $.ajax({
+                method: "POST",
+                url: $apiURL,
+                data: $inputParams
+
+            }).done(function( res ) {
+                console.log( "Response: " + res );
+              }).fail(function( res ) {
+                console.log( res );
+              });
+
+        });
 
 
-    $('#n8f-pop-register-button').on('click', function(e) {
-        // Stop the browser from submitting the form.
-        var formData = $('#n8f-pop-reg-email-addy').text();
-
-        console.log(formData);
     });
 
 }(jQuery));
