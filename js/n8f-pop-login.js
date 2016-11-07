@@ -32,7 +32,7 @@
             $apiURL = 'http://startupacademy.staging.wpengine.com/wp-content/plugins/membermouse/api/request.php?q=/createMember';
 
             $inputParams = "apikey=jpuqzijsv9&apisecret=jqsdfh90gg&";
-            $inputParams += "email="+ regEmail + "&";
+            $inputParams += "email=" + regEmail + "&";
             $inputParams += "membership_level_id=3&";
 
             $.ajax({
@@ -40,54 +40,81 @@
                 url: $apiURL,
                 data: $inputParams
 
-            }).done(function( res ) {
-                var res =  JSON.parse(res);
+            }).done(function(res) {
+                var res = JSON.parse(res);
                 var resCode = res['response_code'];
                 var resData = res['response_data'];
 
-                if (resCode === 200 ) {
+                if (resCode === '200') {
 
-                	$('form#login #username').html(reData.username);
-              		$('form#login #password').html(reData.password);
+                		console.log('success');
+                		$('#tabs-1 p.status').text('Getting you registered and logged in.');
+                		$('form#login #username').val(resData.username);
+                    $('form#login #password').val(resData.password);
+                    $('form#login').trigger( "submit" );
+
 
                 }
 
-                console.log( resData.username );
-                console.log( res['response_data'] );
 
-              }).fail(function( res ) {
-                console.log( res["response_code"] );
-                console.log( res["response_data"] );
-                console.log( res["response_message"] );
-              });
+
+            }).fail(function(res) {
+                console.log(res["response_code"]);
+                console.log(res["response_data"]);
+                console.log(res["response_message"]);
+            });
 
         });
 
 
 
+        var loginUser = function( username, password) {
+            $('form#login p.status').show().text(ajax_login_object.loadingmessage);
+            console.log('Got these: ' + username, password);
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: ajax_login_object.ajaxurl,
+                data: {
+                    'action': 'ajaxlogin', //calls wp_ajax_nopriv_ajaxlogin
+                    'username': $('form#login #username').val(),
+                    'password': $('form#login #password').val(),
+                    'security': $('form#login #security').val()
+                },
+                success: function(data) {
+                    $('form#login p.status').text(data.message);
+                    if (data.loggedin == true) {
+                        document.location.href = ajax_login_object.redirecturl;
+                    }
+                }
+            });
+            e.preventDefault();
+        };
 
 
-		    // Perform AJAX login on form submit
-		    $('form#login').on('submit', function(){
-		        $('form#login p.status').show().text(ajax_login_object.loadingmessage);
-		        $.ajax({
-		            type: 'POST',
-		            dataType: 'json',
-		            url: ajax_login_object.ajaxurl,
-		            data: {
-		                'action': 'ajaxlogin', //calls wp_ajax_nopriv_ajaxlogin
-		                'username': $('form#login #username').val(),
-		                'password': $('form#login #password').val(),
-		                'security': $('form#login #security').val() },
-		            success: function(data){
-		                $('form#login p.status').text(data.message);
-		                if (data.loggedin == true){
-		                    document.location.href = ajax_login_object.redirecturl;
-		                }
-		            }
-		        });
-		        e.preventDefault();
-		    });
+
+        // Perform AJAX login on form submit
+        $('form#login').on('submit', function() {
+            $('form#login p.status').show().text(ajax_login_object.loadingmessage);
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: ajax_login_object.ajaxurl,
+                data: {
+                    'action': 'ajaxlogin', //calls wp_ajax_nopriv_ajaxlogin
+                    'username': $('form#login #username').val(),
+                    'password': $('form#login #password').val(),
+                    'security': $('form#login #security').val()
+                },
+                success: function(data) {
+                    $('form#login p.status').text(data.message);
+                    if (data.loggedin == true) {
+                        document.location.href = ajax_login_object.redirecturl;
+                    }
+                }
+            });
+            e.preventDefault();
+        });
 
 
     });

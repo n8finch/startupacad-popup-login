@@ -42,6 +42,7 @@ if (n8f_pop_is_user_logged_in() && n8f_is_learndash_content()) {
 			  </ul>
 
 		  	<div id="tabs-1" name="myRegistrationForm">
+		  		<p class="status"></p>
 					Email: <input type="email" id="popup-email-register" name="email" /> <br />
 					<button id="popup-submit-register"/>Register</button>
 				</div>
