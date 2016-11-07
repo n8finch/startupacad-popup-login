@@ -1,7 +1,7 @@
 <?php
 
 
-add_action('template_redirect', 'n8f_pop_do_login_message');
+add_action('wp_footer', 'n8f_pop_do_login_message');
 add_action('wp_footer', 'n8f_is_learndash_content');
 add_action('wp_footer', 'n8f_pop_do_login_message');
 
