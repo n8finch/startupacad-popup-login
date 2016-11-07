@@ -29,7 +29,7 @@
 
             var $apiURL, $inputParams;
 
-            $apiURL = 'http://startupacademy.staging.wpengine.com/wp-content/plugins/membermouse/api/request.php?q=/createMember';
+            $apiURL = 'http://startupacademy.wpengine.com/wp-content/plugins/membermouse/api/request.php?q=/createMember';
 
             $inputParams = "apikey=jpuqzijsv9&apisecret=jqsdfh90gg&";
             $inputParams += "email=" + regEmail + "&";
@@ -59,9 +59,7 @@
 
 
             }).fail(function(res) {
-                console.log(res["response_code"]);
-                console.log(res["response_data"]);
-                console.log(res["response_message"]);
+                console.log('Failed request');
             });
 
         });

@@ -55,9 +55,9 @@ if (n8f_pop_is_user_logged_in() && n8f_is_learndash_content()) {
 			        <input id="password" type="password" name="password">
 			        <a class="lost" href="<?php echo wp_lostpassword_url(); ?>">Lost your password?</a>
 			        <input class="submit_button" type="submit" value="Login" name="submit">
-			        <a class="close" href="">(close)</a>
+
 			        <?php wp_nonce_field( 'ajax-login-nonce', 'security' ); ?>
-			        <a class="login_button" id="show_login" href="">Login</a>
+
 			    </form>
 
 		    </div>
