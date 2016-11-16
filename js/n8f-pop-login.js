@@ -1,24 +1,69 @@
 (function($) {
 
+    //Prep all the keys and functions to disable scroll with the modal opens
+    //http://output.jsbin.com/xatidu/4/
+    var keys = { 37: 1, 38: 1, 39: 1, 40: 1 };
+
+    function preventDefault(e) {
+        e = e || window.event;
+        if (e.preventDefault)
+            e.preventDefault();
+        e.returnValue = false;
+    }
+
+    function preventDefaultForScrollKeys(e) {
+        if (keys[e.keyCode]) {
+            preventDefault(e);
+            return false;
+        }
+    }
+
+    function disableScroll() {
+        if (window.addEventListener) // older FF
+            window.addEventListener('DOMMouseScroll', preventDefault, false);
+        window.onwheel = preventDefault; // modern standard
+        window.onmousewheel = document.onmousewheel = preventDefault; // older browsers, IE
+        window.ontouchmove = preventDefault; // mobile
+        document.onkeydown = preventDefaultForScrollKeys;
+    }
+
+    function enableScroll() {
+        if (window.removeEventListener)
+            window.removeEventListener('DOMMouseScroll', preventDefault, false);
+        window.onmousewheel = document.onmousewheel = null;
+        window.onwheel = null;
+        window.ontouchmove = null;
+        document.onkeydown = null;
+    }
+
+
     $(function() {
         $("#n8f-popup-login-message").tabs();
     });
 
-    $(function() {
-        $("#n8f-popup-login-message").dialog({
-            title: 'You need to register.',
-            modal: true,
-            height: 450,
-            width: 400,
-            closeOnEscape: false,
-        });
+    setTimeout(function(){
+    	console.log('timeout');
+
+		  $(function() {
+		      $("#n8f-popup-login-message").dialog({
+		          title: 'Welcome to Startup Academy!',
+		          draggable: false,
+		          modal: true,
+		          height: 500,
+		          width: 500,
+		          closeOnEscape: false,
+		          open: function() {
+		              disableScroll();
+		          }
+		      });
+
+		  });
+
+     }, 3000);
 
 
-
-    });
 
     $(document).ready(function() {
-        console.log('n8f-pop- load');
 
         //Register the visitor
 
@@ -29,7 +74,7 @@
 
             var $apiURL, $inputParams;
 
-            $apiURL = 'http://startupacademy.wpengine.com/wp-content/plugins/membermouse/api/request.php?q=/createMember';
+            $apiURL = 'https://www.startupacademy.org/wp-content/plugins/membermouse/api/request.php?q=/createMember';
 
             $inputParams = "apikey=jpuqzijsv9&apisecret=jqsdfh90gg&";
             $inputParams += "email=" + regEmail + "&";
@@ -47,17 +92,12 @@
 
                 if (resCode === '200') {
 
-                		console.log('success');
-                		$('#tabs-1 p.status').text('Getting you registered and logged in.');
-                		$('form#login #username').val(resData.username);
+                    console.log('success');
+                    $('#tabs-1 p.status').text('Getting you registered and logged in.');
+                    $('form#login #username').val(resData.username);
                     $('form#login #password').val(resData.password);
-                    $('form#login').trigger( "submit" );
-
-
+                    $('form#login').trigger("submit");
                 }
-
-
-
             }).fail(function(res) {
                 console.log('Failed request');
             });
@@ -66,7 +106,7 @@
 
 
 
-        var loginUser = function( username, password) {
+        var loginUser = function(username, password) {
             $('form#login p.status').show().text(ajax_login_object.loadingmessage);
             console.log('Got these: ' + username, password);
             $.ajax({
@@ -89,10 +129,8 @@
             e.preventDefault();
         };
 
-
-
         // Perform AJAX login on form submit
-        $('form#login').on('submit', function() {
+        $('form#login').on('submit', function(e) {
             $('form#login p.status').show().text(ajax_login_object.loadingmessage);
             $.ajax({
                 type: 'POST',

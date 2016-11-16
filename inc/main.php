@@ -16,17 +16,12 @@ function n8f_pop_is_user_logged_in() {
 
 function n8f_is_learndash_content() {
 
-	if(is_singular('sfwd-lessons' ) || is_singular('sfwd-courses' ) || is_singular('sfwd-topic' )) {
+	if(is_singular('sfwd-lessons' ) || is_singular('sfwd-courses' ) || is_singular('sfwd-topic' )  || is_page('adam-cheyer-teaser') ) {
 		return true;
 	} else {
 		return false;
 	}
 }
-
-
-
-
-
 
 
 
@@ -36,6 +31,7 @@ if (n8f_pop_is_user_logged_in() && n8f_is_learndash_content()) {
 
  	?>
  	<div id="n8f-popup-login-message">
+ 				<p>Ready to begin your startup journey? Join thousands of others to access exclusive content and learn to thrive as an entrepreneur. Register with just an email, or login.</p>
 				<ul>
 			    <li><a href="#tabs-1">Register</a></li>
 			    <li><a href="#tabs-2">Login</a></li>
@@ -43,19 +39,17 @@ if (n8f_pop_is_user_logged_in() && n8f_is_learndash_content()) {
 
 		  	<div id="tabs-1" name="myRegistrationForm">
 		  		<p class="status"></p>
-					Email: <input type="email" id="popup-email-register" name="email" /> <br />
-					<button id="popup-submit-register"/>Register</button>
+					<p>Email: <input type="email" id="popup-email-register" name="email" /></p>
+					<p><button id="popup-submit-register">Register</button></p>
+					<p>If you are already registered then please login.</p>
 				</div>
 				<div id="tabs-2">
 					<form id="login" action="login" method="post">
 			        <p class="status"></p>
-			        <label for="username">Username</label>
-			        <input id="username" type="text" name="username">
-			        <label for="password">Password</label>
-			        <input id="password" type="password" name="password">
-			        <a class="lost" href="<?php echo wp_lostpassword_url(); ?>">Lost your password?</a>
-			        <input class="submit_button" type="submit" value="Login" name="submit">
-
+			        <p class="username"><label for="username">Email: </label><input id="username" type="text" name="username"></p>
+			        <p><label for="password">Password: </label><input id="password" type="password" name="password"></p>
+						<p><input class="submit_button" type="submit" value="Login" name="submit"></p>
+						<p><a class="lost" href="https://www.startupacademy.org/forgot-password/">Lost your password?</a></p>
 			        <?php wp_nonce_field( 'ajax-login-nonce', 'security' ); ?>
 
 			    </form>
