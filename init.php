@@ -25,11 +25,11 @@ function n8f_pop_add_these_plugin_styles_and_scripts() {
 	wp_localize_script( 'n8f-pop-login-js', 'ajax_login_object', array(
         'ajaxurl' => admin_url( 'admin-ajax.php' ),
         'redirecturl' => home_url(),
-        'loadingmessage' => __('Sending user info, please wait...')
+        'loadingmessage' => __('Sending user info, please wait...'),
+		'lockpopup' => get_field('show_popup_on_this_page')
     ));
 
     // Enable the user with no privileges to run ajax_login() in AJAX
     add_action( 'wp_ajax_nopriv_ajaxlogin', 'ajax_login' );
 
 }
-

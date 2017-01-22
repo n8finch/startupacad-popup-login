@@ -4,7 +4,7 @@
 add_action('wp_footer', 'n8f_is_learndash_content');
 add_action('wp_footer', 'n8f_pop_do_login_message');
 
-function n8f_pop_is_user_logged_in() {
+function n8f_pop_is_user_not_logged_in() {
 
 	if(!is_user_logged_in()) {
 		return true;
@@ -16,7 +16,7 @@ function n8f_pop_is_user_logged_in() {
 
 function n8f_is_learndash_content() {
 
-	if(is_singular('sfwd-lessons' ) || is_singular('sfwd-courses' ) || is_singular('sfwd-topic' )  || is_page('adam-cheyer-teaser') ) {
+	if( get_field('show_popup_on_this_page') === 'yes'  ) {
 		return true;
 	} else {
 		return false;
@@ -27,11 +27,12 @@ function n8f_is_learndash_content() {
 
 function n8f_pop_do_login_message() {
 
-if (n8f_pop_is_user_logged_in() && n8f_is_learndash_content()) {
+if (n8f_pop_is_user_not_logged_in() && n8f_is_learndash_content()) {
 
  	?>
  	<div id="n8f-popup-login-message">
- 				<p>Ready to begin your startup journey? Join thousands of others to access exclusive content and learn to thrive as an entrepreneur. Register with just an email, or login.</p>
+ 				<p style="margin-bottom: 0;">Ready to begin your startup journey? Join thousands of others to access exclusive content and learn to thrive as an entrepreneur.</p>
+				<p>Register <strong>FOR FREE</strong> with just an email, or login.</p>
 				<ul>
 			    <li><a href="#tabs-1">Register</a></li>
 			    <li><a href="#tabs-2">Login</a></li>
