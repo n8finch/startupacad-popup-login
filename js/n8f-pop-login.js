@@ -60,8 +60,8 @@
         dialogWidth = screenWidth * .95;
         dialogHeight = screenHeight * .95;
     } else {
-        dialogWidth = 500;
-        dialogHeight = 525;
+        dialogWidth = 600;
+        dialogHeight = 550;
         isDesktop = true;
     }
 
@@ -90,6 +90,12 @@
 
     $(document).ready(function() {
 
+		//Toggle tabs from below
+		$('.popup-main-content #login-link').on('click', function(e) {
+			e.preventDefault();
+			$('li#tabs-2').trigger('click');
+		});
+
         //Register the visitor
 
         $("#popup-submit-register").on('click', function(event) {
@@ -99,7 +105,10 @@
 
             var $apiURL, $inputParams;
 
-            $apiURL = 'https://www.startupacademy.org/wp-content/plugins/membermouse/api/request.php?q=/createMember';
+            // $apiURL = 'https://www.startupacademy.org/wp-content/plugins/membermouse/api/request.php?q=/createMember';
+            $apiURL = ajax_login_object.redirecturl;
+
+			console.log('$apiURL: ' + $apiURL );
 
             $inputParams = "apikey=jpuqzijsv9&apisecret=jqsdfh90gg&";
             $inputParams += "email=" + regEmail + "&";

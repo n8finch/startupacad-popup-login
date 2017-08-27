@@ -31,34 +31,48 @@ if (n8f_pop_is_user_not_logged_in() && n8f_is_learndash_content()) {
 
  	?>
  	<div id="n8f-popup-login-message">
- 				<p style="margin-bottom: 0;">Ready to begin your startup journey? Join thousands of others to access exclusive content and learn to thrive as an entrepreneur.</p>
-				<p>Register <strong>FOR FREE</strong> with just an email, or login.</p>
-				<ul>
-			    <li><a href="#tabs-1">Register</a></li>
-			    <li><a href="#tabs-2">Login</a></li>
-			  </ul>
+		<div class="popup-header-image">
+			<img src="/wp-content/themes/new-startupacademy/images/logo-square-3x.png"  />
+			<h2>GET STARTED</h2>
+			<p>with a free discover pass</p>
+		</div>
+		<div class="popup-main-content">
+			<p style="margin-bottom: 0;">Ready to begin your startup journey? Join thousands of others to access exclusive content and learn to thrive as an entrepreneur.</p>
+			<ul>
+				<li><a href="#tabs-1">Register</a></li>
+				<li><a href="#tabs-2">Login</a></li>
+			</ul>
 
 		  	<div id="tabs-1" name="myRegistrationForm">
 		  		<p class="status"></p>
-					<p>Email: <input type="email" id="popup-email-register" name="email" /></p>
-					<p><button id="popup-submit-register">Register</button></p>
-					<p>If you are already registered then please login.</p>
-				</div>
+				<p>Choose your pass:
+					<select id="popup-pass-select" name="email" />
+						<option value="free">Free</option>
+						<option value="allaccess" selected>All Access Pass (USD $10.99/month)</option>
+						<option value="challenge">Challenge Pass (USD $199, one-time purchase)</option>
+					</select>
+				</p>
+				<p>Enter your email: <input type="email" id="popup-email-register" name="email" /></p>
+				<p class="button-container"><button id="popup-submit-register">REGISTER</button></p>
+				<p>A password will be emailed to you.<br/>If you are already registered then please <a id="login-link" href="#tabs-2">login</a>.</p>
+			</div>
 				<div id="tabs-2">
 					<form id="login" action="login" method="post">
-			        <p class="status"></p>
-			        <p class="username"><label for="username">Email: </label><input id="username" type="text" name="username"></p>
-			        <p><label for="password">Password: </label><input id="password" type="password" name="password"></p>
-						<p><input class="submit_button" type="submit" value="Login" name="submit"></p>
-						<p><a class="lost" href="https://www.startupacademy.org/forgot-password/">Lost your password?</a></p>
-			        <?php wp_nonce_field( 'ajax-login-nonce', 'security' ); ?>
+				        <p class="status"></p>
+				        <p class="username"><label for="username">Email: </label><input id="username" type="text" name="username"></p>
+				        <p><label for="password">Password: </label><input id="password" type="password" name="password"></p>
+							<p class="button-container"><input class="submit_button" type="submit" value="LOGIN" name="submit"></p>
+							<p><a class="lost" href="https://www.startupacademy.org/forgot-password/">Lost your password?</a></p>
+				        <?php wp_nonce_field( 'ajax-login-nonce', 'security' ); ?>
 
-			    </form>
+			    	</form>
 
 		    </div>
+		</div> <!-- end popup-main-content -->
 
 
-		</div> <?php //end popup
+
+	</div> <?php //end popup
 
 	}
 }

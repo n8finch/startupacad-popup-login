@@ -16,11 +16,12 @@ button.extra-class-here.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-bu
 }
 
 #n8f-popup-login-message {
-  height: 400px;
+	background-color: #f6f6f6;
+	height: 400px;
 }
 
 #n8f-popup-login-message p {
-    color: #8b8b8b;
+    color: black;
     font-family: proxima-nova;
     font-size: 14px;
 }
@@ -29,6 +30,7 @@ button.extra-class-here.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-bu
     border-radius: 10px;
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
     border: none;
+	padding: 0;
 }
 
 .ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix {
@@ -38,6 +40,7 @@ button.extra-class-here.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-bu
     border-radius: 5px 5px 0 0;
     font-family: proxima-nova;
     font-size: 17px;
+	display: none;
     letter-spacing: 1px;
     text-transform: uppercase;
     margin: -10px -10px 5px;
@@ -63,13 +66,61 @@ button.extra-class-here.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-bu
     color: #D48E29 !important;
 }
 
+div#n8f-popup-login-message {
+    padding: 0;
+}
+
+div#n8f-popup-login-message a {
+    color: #FF9B02;
+	text-decoration: none;
+}
+
+.popup-header-image {
+	background-image: url("/wp-content/themes/new-startupacademy/images/popup-header-img-2x.jpg") !important;
+	height: 135px;
+    background-position-y: -28px;
+    background-repeat: no-repeat;
+    background-size: cover;
+	color: white;
+	padding: 25px;
+}
+
+.popup-header-image img,
+.popup-header-image h2 {
+	float: left;
+	margin-bottom: 5px;
+}
+
+.popup-header-image img {
+	height: 40px;
+}
+
+.popup-header-image p {
+	clear: both;
+	color: white !important;
+	margin-bottom: 5px;
+}
+
+.popup-main-content {
+	padding: 5px 25px 25px;
+}
+
+.popup-main-content p {
+	margin-bottom: 15px;
+}
+
+.popup-main-content p.button-container {
+	text-align: right !important;
+}
+
 .ui-tabs .ui-tabs-nav {
     margin: 0;
     padding: 0;
 }
 
 .ui-tabs .ui-tabs-nav .ui-tabs-anchor {
-    color: #333 !important;
+    background-color: #f6f6f6;
+	color: #333 !important;
     font-family: proxima-nova;
     font-weight: 700;
     text-transform: uppercase;
@@ -87,44 +138,61 @@ div.ui-tabs-panel.ui-widget-content.ui-corner-bottom {
     overflow: hidden;
 }
 
-div.ui-tabs-panel button, div.ui-tabs-panel input.submit_button {
-    border: none;
-    color: #fff;
-    font-family: "proxima-nova";
-    font-size: 15px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    padding: 15px 30px;
-    transition: 0.5s all;
-    text-transform: uppercase;
-    border-bottom: none;
-    box-shadow: 0 4px #db8902;
-    border-radius: 5px;
-    background: #ff9d00;
+div.ui-tabs-panel button, div.ui-tabs-panel input.submit_button:hover {
+	color: white;
 }
 
 div.ui-tabs-panel button:hover, div.ui-tabs-panel input.submit_button:hover {
-    background: #FFB119 !important;
+	background-color: white;
+	color: #FF9B02;
 }
 
 .ui-tabs .ui-tabs-panel {
     padding: 10px 20px 1px;
 }
 
+.ui-tabs .ui-tabs-nav li {
+    border-radius: 0;
+	font-size: 16px;
+	margin: 0;
+}
+
+li.ui-state-default.ui-corner-top.ui-tabs-active.ui-state-active a {
+    background: #FF9B02;
+    color: white !important;
+}
+
 #tabs-1 input, #tabs-2 input {
-    margin-left: 10px;
+    height: 40px;
+}
+
+#tabs-1 input, #tabs-2 p {
+    /*margin-bottom: 10px;*/
+}
+
+#popup-pass-select {
+	-o-appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	height: 40px;
+	padding: 5px;
 }
 
 #tabs-1 button#popup-submit-register {
-    margin-left: 12px;
+    height: 40px;
+    line-height: 1;
 }
 
 #login input#username {
-    margin-right: -24px;
+    /*margin-right: -24px;*/
+}
+
+#login input.submit_button {
+    line-height: 1;
 }
 
 .ui-tabs-panel.ui-widget-content.ui-corner-bottom p {
-    text-align: center;
+    text-align: left;
     font-weight: bold;
 }
 
@@ -134,12 +202,12 @@ div.ui-tabs-panel button:hover, div.ui-tabs-panel input.submit_button:hover {
 
 div.ui-tabs-panel.ui-widget-content.ui-corner-bottom {
     border: none;
-    background: #EEE;
+    background: white;
 }
 
 .ui-state-default.ui-corner-top.ui-tabs-active.ui-state-active {
     border: none;
-    background: #EEE !important;
+    background: #f6f6f6 !important;
 }
 
 
