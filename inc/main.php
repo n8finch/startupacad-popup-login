@@ -79,9 +79,13 @@ if (n8f_pop_is_user_not_logged_in() && n8f_is_learndash_content()) {
 
 
 
+// Enable the user with no privileges to run ajax_login() in AJAX
+add_action( 'wp_ajax_ajaxlogin', 'n8f_pop_ajax_login' );
+add_action( 'wp_ajax_nopriv_ajaxlogin', 'n8f_pop_ajax_login' );
+
 function n8f_pop_ajax_login(){
 
-    // First check the nonce, if it fails the function will break
+	// First check the nonce, if it fails the function will break
     check_ajax_referer( 'ajax-login-nonce', 'security' );
 
     // Nonce is checked, get the POST data and sign user on

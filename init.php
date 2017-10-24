@@ -18,7 +18,7 @@ add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\n8f_pop_add_these_plugin_sty
 
 function n8f_pop_add_these_plugin_styles_and_scripts() {
 
-	wp_enqueue_style( 'n8f-pop-login-css', plugin_dir_url( __FILE__ ) . 'css/n8f-pop-login.css' );
+	// wp_enqueue_style( 'n8f-pop-login-css', plugin_dir_url( __FILE__ ) . 'css/n8f-pop-login.css' );
 
 	wp_enqueue_script( 'n8f-pop-login-js', plugin_dir_url( __FILE__ ) . 'js/n8f-pop-login.js', array( 'jquery', 'jquery-ui-dialog', 'jquery-ui-tabs' ), false, false );
 
@@ -28,8 +28,5 @@ function n8f_pop_add_these_plugin_styles_and_scripts() {
         'loadingmessage' => __('Sending user info, please wait...'),
 		'lockpopup' => get_field('show_popup_on_this_page')
     ));
-
-    // Enable the user with no privileges to run ajax_login() in AJAX
-    add_action( 'wp_ajax_nopriv_ajaxlogin', 'ajax_login' );
 
 }

@@ -169,7 +169,7 @@
             e.preventDefault();
         };
 
-        // Perform AJAX login on form submit
+		// Perform AJAX login on form submit
         $('form#login').on('submit', function(e) {
             $('form#login p.status').show().text(ajax_login_object.loadingmessage);
             $.ajax({
