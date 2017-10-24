@@ -47,14 +47,15 @@ if (n8f_pop_is_user_not_logged_in() && n8f_is_learndash_content()) {
 		  		<p class="status"></p>
 				<p>Choose your pass:
 					<select id="popup-pass-select" name="email" />
-						<option value="free">Free</option>
-						<option value="allaccess" selected>All Access Pass (USD $10.99/month)</option>
+						<option value="free" selected>Free</option>
+						<option value="allaccess">All Access Pass (USD $10.99/month)</option>
 						<option value="challenge">Challenge Pass (USD $199, one-time purchase)</option>
 					</select>
 				</p>
-				<p>Enter your email: <input type="email" id="popup-email-register" name="email" /></p>
+				<p>Enter your email: <input type="email" id="popup-email-register" name="email" required="true"/></p>
+				<p>Choose a password: <input type="password" id="popup-password-register" name="password" required="true"/></p>
 				<p class="button-container"><button id="popup-submit-register">REGISTER</button></p>
-				<p>A password will be emailed to you.<br/>If you are already registered then please <a id="login-link" href="#tabs-2">login</a>.</p>
+				<p>If you are already registered then please click the Login tab.</p>
 			</div>
 				<div id="tabs-2">
 					<form id="login" action="login" method="post">

@@ -89,16 +89,26 @@
 
 
     $(document).ready(function() {
+		var selectedPass = $('#popup-pass-select').val();
+
+		// Make sure we have an email
+		function checkIfEmailInString(text) {
+			var re = /(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
+
+			return re.test(text);
+		}
 
 		//Toggle tabs from below
 		$('.popup-main-content #login-link').on('click', function(e) {
 			e.preventDefault();
-			$('li#tabs-2').trigger('click');
+			console.log($('.popup-main-content ul li#tabs-2' ));
+			$('.popup-main-content ul li#tabs-1' ).removeClass('ui-tabs-active ui-state-active');
+			$('.popup-main-content ul li#tabs-2' ).addClass('ui-tabs-active ui-state-active');
 		});
 
+
 		$('#popup-pass-select').change( function(e) {
-			console.log(e);
-			console.log( $(this).val() );
+			selectedPass = $(this).val();
 		})
 
 		/*
@@ -108,13 +118,34 @@
             event.preventDefault();
 
             var regEmail = $('#popup-email-register').val();
+            var regPass = $('#popup-password-register').val();
             var $apiURL, $inputParams;
+			var isValidEmail = checkIfEmailInString(regEmail);
 
+			// Run our checks
+			if( '' === regEmail ) {
+				$('#tabs-1 p.status').text('You must enter an email to register').css('color', 'red');
+				return
+			}
+
+			if( !isValidEmail ) {
+				$('#tabs-1 p.status').text('You must enter a valid email to register').css('color', 'red');
+				return
+			}
+
+			if( '' === regPass ) {
+				$('#tabs-1 p.status').text('You must enter a password to register').css('color', 'red');
+				return
+			}
+
+
+			$('#tabs-1 p.status').text('Sending registration, please wait...');
             // $apiURL = 'https://www.startupacademy.org/wp-content/plugins/membermouse/api/request.php?q=/createMember';
             $apiURL = ajax_login_object.mm+'?q=/createMember';
 
             $inputParams = "apikey=jpuqzijsv9&apisecret=jqsdfh90gg&";
             $inputParams += "email=" + regEmail + "&";
+            $inputParams += "password=" + regPass + "&";
             $inputParams += "membership_level_id=3&";
 
             $.ajax({
@@ -124,16 +155,13 @@
                 data: $inputParams
 
             }).done(function(res) {
-				console.log( res );
+
                 var resCode = res.response_code;
                 var resData = res.response_data;
-				console.log( resCode);
-				console.log( resData);
+
                 if (resCode === '200') {
 
-                    console.log('success');
-                    console.log(resData);
-
+					//TODO: could change this to an ajax login instead of "ghost filling" the login form
                     $('#tabs-1 p.status').text('Getting you registered and logged in.');
                     $('form#login #username').val(resData.username);
                     $('form#login #password').val(resData.password);
@@ -154,6 +182,8 @@
         var loginUser = function(username, password) {
             $('form#login p.status').show().text(ajax_login_object.loadingmessage);
             console.log('Got these: ' + username, password);
+
+			debugger;
             $.ajax({
                 type: 'POST',
                 dataType: 'json',
@@ -192,10 +222,14 @@
                 },
                 success: function(data) {
                     $('form#login p.status').text(data.message);
-                    if (data.loggedin == true) {
+                    if (data.loggedin == true && selectedPass === 'free' ) {
                         document.location.href = window.location.href;
-
-                        console.log('user logged in automatically');
+                    }
+                    if ( data.loggedin == true && selectedPass === 'allaccess' ) {
+                        document.location.href = window.location.origin + '/checkout/?rid=p57v64';
+                    }
+                    if ( data.loggedin == true && selectedPass === 'challenge' ) {
+                        document.location.href = window.location.origin + '/checkout/?rid=p68HAf';
                     }
                 }
             });
