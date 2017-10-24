@@ -96,19 +96,22 @@
 			$('li#tabs-2').trigger('click');
 		});
 
-        //Register the visitor
+		$('#popup-pass-select').change( function(e) {
+			console.log(e);
+			console.log( $(this).val() );
+		})
 
+		/*
+  		 * Register the visitor
+		 */
         $("#popup-submit-register").on('click', function(event) {
             event.preventDefault();
-            var regEmail = $('#popup-email-register').val();
-            console.log('Value: ' + regEmail);
 
+            var regEmail = $('#popup-email-register').val();
             var $apiURL, $inputParams;
 
             // $apiURL = 'https://www.startupacademy.org/wp-content/plugins/membermouse/api/request.php?q=/createMember';
-            $apiURL = ajax_login_object.redirecturl;
-
-			console.log('$apiURL: ' + $apiURL );
+            $apiURL = ajax_login_object.mm+'?q=/createMember';
 
             $inputParams = "apikey=jpuqzijsv9&apisecret=jqsdfh90gg&";
             $inputParams += "email=" + regEmail + "&";
@@ -116,14 +119,16 @@
 
             $.ajax({
                 method: "POST",
+				dataType: 'json',
                 url: $apiURL,
                 data: $inputParams
 
             }).done(function(res) {
-                var res = JSON.parse(res);
-                var resCode = res['response_code'];
-                var resData = res['response_data'];
-
+				console.log( res );
+                var resCode = res.response_code;
+                var resData = res.response_data;
+				console.log( resCode);
+				console.log( resData);
                 if (resCode === '200') {
 
                     console.log('success');
@@ -133,16 +138,19 @@
                     $('form#login #username').val(resData.username);
                     $('form#login #password').val(resData.password);
                     $('form#login').trigger("submit");
-                    debugger;
+
                 }
             }).fail(function(res) {
-                console.log('Failed request');
+                console.log('Failed request: ' );
+                console.log( res );
             });
 
         });
 
 
-
+		/*
+  		 * Login user automatically after registration
+		 */
         var loginUser = function(username, password) {
             $('form#login p.status').show().text(ajax_login_object.loadingmessage);
             console.log('Got these: ' + username, password);
@@ -185,7 +193,7 @@
                 success: function(data) {
                     $('form#login p.status').text(data.message);
                     if (data.loggedin == true) {
-                        document.location.href = ajax_login_object.redirecturl;
+                        document.location.href = window.location.href;
 
                         console.log('user logged in automatically');
                     }

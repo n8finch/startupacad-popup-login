@@ -26,7 +26,8 @@ function n8f_pop_add_these_plugin_styles_and_scripts() {
         'ajaxurl' => admin_url( 'admin-ajax.php' ),
         'redirecturl' => home_url(),
         'loadingmessage' => __('Sending user info, please wait...'),
-		'lockpopup' => get_field('show_popup_on_this_page')
+		'lockpopup' => get_field('show_popup_on_this_page'),
+		'mm' => home_url() . '/wp-content/plugins/membermouse/api/request.php'
     ));
 
 }
